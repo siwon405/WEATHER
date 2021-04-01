@@ -1,0 +1,16 @@
+c8d835430f3b2653f4e1788d27988e39
+
+
+api.openweathermap.org/data/2.5/weather?q=Suwon&appid=c8d835430f3b2653f4e1788d27988e39&units=metric 
+
+https://api.openweathermap.org/data/2.5/onecall?lat=37.2911&lon=127.0089&appid=c8d835430f3b2653f4e1788d27988e39&units=metric 
+
+[37.2911, 127.0089]
+
+$.getJson('파일경로',function(result){});
+
+code.jquery.com
+
+http://openweathermap.org/img/wn/10d.png
+
+api.openweathermap.org/data/2.5/weather?q={city name}&appid=c8d835430f3b2653f4e1788d27988e39

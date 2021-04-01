@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather API</title>
+</head>
+<body>
+    <h2>current weather</h2>
+    <h3 class="time">현재 시간: </h3>
+    <h3 class="ctemp">현재 온도: </h3>
+    <h3 class="lowtemp">최저 온도: </h3>
+    <h3 class="hightemp">최고 온도: </h3>
+    <h3 class="icon">
+        <!-- <img src="http://openweathermap.org/img/wn/10d.png" alt=""> -->
+    </h3>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=Suwon&appid=c8d835430f3b2653f4e1788d27988e39&units=metric ',
+                    function(
+                        result){
+                        
+                        $('.ctemp').append(result.main.temp);
+                        $('.lowtemp').append(result.main.temp_min);
+                        $('.hightemp').append(result.main.temp_max);
+                        // result.weather[0].icon
+                        var wiconUrl = '<img src="http://openweathermap.org/img/wn/'+result.weather[0].icon+'.png" alt="'+result.weather[0].description+'">'
+                        $('.icon').html(wiconUrl);
+
+                        var ct = result.dt;
+
+                        function convertTime(t){
+                            var ot = new Date(t*1000);//현재 시간: Thu Apr 01 2021 00:14:03 GMT+0900 (대한민국 표준시)
+                            var hr = ot.getHours();
+                            var m = ot.getMinutes();
+                            var s = ot.getSeconds();
+
+                            return hr + ':' + m + ':' + s
+                        }
+
+                        var currentTime = convertTime(ct);
+                        $('.time').append(currentTime);
+
+        });
+        
+    </script>
+    
+</body>
+</html>

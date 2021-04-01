@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather forecast API</title>
+</head>
+<body>
+    <h2>weather forecast 48hours</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>시간</td>
+                
+                <td>온도</td>
+            </tr>            
+        </thead>
+        <tbody>
+            <!-- <tr>
+               <td>현재 시간</td> 
+               <td>현재 온도</td> 
+            </tr> -->
+        </tbody>
+    </table>    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $.getJSON('https://api.openweathermap.org/data/2.5/onecall?lat=37.2911&lon=127.0089&appid=c8d835430f3b2653f4e1788d27988e39&units=metric',
+                    function(
+                        result){   
+                      
+                        for(var i = 0; i < 48; i++){
+                            var ctime = result.hourly[i].dt;
+                            var ctemp = result.hourly[i].temp;
+
+                            function convertTime(t){
+                                var ot = new Date(t*1000);//현재 시간: Thu Apr 01 2021 00:14:03 GMT+0900 (대한민국 표준시)
+                                var dt = ot.getDate();
+                                var hr = ot.getHours();
+                                var m = ot.getMinutes();
+                                var s = ot.getSeconds();
+
+                                return dt + '일-' + hr + '시'
+                            }
+                            var currentTime = convertTime(ctime);
+                            var tableHtml =  '<tr>'+
+                                                '<td>'+currentTime+'</td>' +
+                                                '<td>'+'</td>' +
+                                                '<td>'+ctemp+'</td>'+
+                                             '</tr>';    
+                                             $('tbody').append(tableHtml);
+                                            
+                        }                 
+                   
+                        var currentTime = convertTime(ct);
+                        $('.time').append(currentTime);
+        });        
+    </script>
+    
+</body>
+</html>
